@@ -44,10 +44,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'drf_spectacular',
     'rest_framework',
     'corsheaders',
     'users',
     'companies',
+    'mentors',
 ]
 
 MIDDLEWARE = [
@@ -118,10 +120,33 @@ STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 STATICFILES_DIRS = ['media/']
 
-MAILERS = {
-    'default': {
-        'BACKEND': 'django.core.mail.backends.console.EmailBackend',
-    },
+DEFAULT_FROM_EMAIL = 'readysetai@support.com'
+
+REST_FRAMEWORK = {
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
 }
 
+SPECTACULAR_SETTINGS = {
+    "TITLE": "ReadySet AI API",
+    "DESCRIPTION": "API documentation",
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
+}
+
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+# MAILERS = {
+#     'default': {
+#         'BACKEND': 'django.core.mail.backends.console.EmailBackend',
+#     },
+# }
+
 AUTH_USER_MODEL = 'users.CustomUser'
+
+BASE_URL = os.getenv('BASE_URL', 'http://localhost:8080')

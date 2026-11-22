@@ -35,6 +35,7 @@ class Company(TimeStampMixin, models.Model):
     )
 
     class Meta:
+        db_table = "companies"
         verbose_name = "Company"
         verbose_name_plural = "Companies"
 
