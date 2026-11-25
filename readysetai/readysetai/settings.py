@@ -47,9 +47,10 @@ INSTALLED_APPS = [
     'drf_spectacular',
     'rest_framework',
     'corsheaders',
-    'users',
+    'users.apps.UsersConfig',
     'companies',
     'mentors',
+    'anymail',
 ]
 
 MIDDLEWARE = [
@@ -120,8 +121,6 @@ STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 STATICFILES_DIRS = ['media/']
 
-DEFAULT_FROM_EMAIL = 'readysetai@support.com'
-
 REST_FRAMEWORK = {
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -139,7 +138,12 @@ SPECTACULAR_SETTINGS = {
     "SERVE_INCLUDE_SCHEMA": False,
 }
 
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+EMAIL_BACKEND = "anymail.backends.brevo.EmailBackend"
+ANYMAIL = {
+    "BREVO_API_KEY": os.getenv("BREVO_API_KEY"),
+    "REQUESTS_TIMEOUT": 10,
+}
+DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL")
 
 # MAILERS = {
 #     'default': {

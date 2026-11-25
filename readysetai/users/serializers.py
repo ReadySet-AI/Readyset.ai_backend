@@ -48,7 +48,6 @@ class ActivateUserSerializer(serializers.Serializer):
 
     def create(self, validated_data):
         password = validated_data.pop("password")
-        confirm_password = validated_data.pop("confirm_password")
 
         with transaction.atomic():
             user = validated_data['user']

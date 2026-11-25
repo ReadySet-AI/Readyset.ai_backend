@@ -16,4 +16,5 @@ def send_invitation_email(user):
     uid, token = generate_uid_token(user)
     subject = "Activate your account"
     message = f"Greetings\n\n Please use the following link to activate your account: {settings.BASE_URL}/activate/{uid}/{token}"
+
     send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [user.email])
