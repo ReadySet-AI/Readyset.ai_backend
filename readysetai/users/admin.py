@@ -8,7 +8,6 @@ from users.models import CustomUser
 class CustomUserAdmin(admin.ModelAdmin):
     list_display = ('id', 'email')
     search_fields = ('id', 'email')
-    list_filter = ('id', 'email')
     exclude = (
         'password',
         'date_joined',

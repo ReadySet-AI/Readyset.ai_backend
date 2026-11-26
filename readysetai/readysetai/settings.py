@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'companies',
     'mentors',
+    'newcomer',
     'anymail',
 ]
 
@@ -154,3 +155,13 @@ DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL")
 AUTH_USER_MODEL = 'users.CustomUser'
 
 BASE_URL = os.getenv('BASE_URL', 'http://localhost:8080')
+
+JAZZMIN_SETTINGS = {
+    "site_title": "ReadySet AI Admin",
+    "icons": {
+        "users.customuser": "fas fa-user",
+        "companies.company": "fas fa-building",
+        "mentors.mentor": "fas fa-chalkboard-teacher",
+        "newcomer.newcomer": "fas fa-user-graduate",
+    },
+}
